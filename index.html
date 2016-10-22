@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<!-- Date: 08 Oct 2016 THINK SIMPLE-->
+<head>
+	<title>H590 Project2</title>
+	<!-- Below tag lines to have responsive page based on bootstrap -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- D3 related javascripts -->
+	<script src="scripts/d3.min.js" charset="utf-8"></script>
+	<script src="scripts/d3.tip.js" charset="utf-8"></script>
+	<script src="scripts/topojson.v1.js" charset="utf-8"></script>
+	<script src="scripts/basic.js" charset="utf-8"></script>
+	<script src="scripts/data.js" charset="utf-8"></script>
+	<script src="http://d3js.org/queue.v1.min.js"></script>
+	
+	<!-- styling related sources -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	
+	<style>
+		.background-header {
+			background-image: url("images/navbar.png");
+			background-repeat: repeat-x;
+			height: 100px;
+		}
+		
+		.counties {
+			stroke: #fff;
+		}
+			
+		.states {
+			stroke: #fff;
+			stroke-linejoin: round;
+		}
+		
+		.form-control{
+			width: 370px;
+		}
+		
+		#secVarLabel, #variable2Type{
+			display: none;
+		}
+
+		.d3-tip {
+		  line-height: 1;
+		  font-weight: bold;
+		  padding: 12px;
+		  background: rgba(0, 0, 0, 0.8);
+		  color: #fff;
+		  border-radius: 2px;
+		}
+
+		/* Creates a small triangle extender for the tooltip */
+		.d3-tip:after {
+		  box-sizing: border-box;
+		  display: inline;
+		  font-size: 10px;
+		  width: 100%;
+		  line-height: 1;
+		  color: rgba(0, 0, 0, 0.8);
+		  content: "\25BC";
+		  position: absolute;
+		  text-align: center;
+		}
+
+		/* Style northward tooltips differently */
+		.d3-tip.n:after {
+		  margin: -1px 0 0 0;
+		  top: 100%;
+		  left: 0;
+		}
+		/* Style the tab content */
+		.tabcontent {
+			display: none;
+			padding: 6px 12px;
+			-webkit-animation: fadeEffect 1s;
+			animation: fadeEffect 1s;
+		}
+
+		@-webkit-keyframes fadeEffect {
+			from {opacity: 0;}
+			to {opacity: 1;}
+		}
+
+		@keyframes fadeEffect {
+			from {opacity: 0;}
+			to {opacity: 1;}
+		}
+	</style>
+</head>
+
+<body onload="firstTabFunc(event)">
+
+<div class="background-header">
+</div>
+
+<ul class="navbar nav nav-pills" style="position: absolute; left: 50px; top: 20px;">
+  <li><a href="#" class="tablinks" onclick="firstTabFunc(event)">Basic</a></li>
+  <li><a href="#" class="tablinks" onclick="secondTabFunc(event)">Compare</a></li>
+  <li><a href="#" class="tablinks" onclick="fourthTabFunc(event)">Documentation</a></li>
+  <li><a href="#" class="tablinks" onclick="fifthTabFunc(event)">Video</a></li>
+</ul>
+
+<div class="tabcontent" id="first" style="overflow-x:auto;">
+<table border="0">
+	<tr>
+		<td>
+			<label style="font-size: 15px;">Variable1: </label>
+		</td>
+		<td style="padding-left: 10px;">
+			<select class="form-control" id="variable1Type"></select>
+		</td>
+		<td style="padding-left: 20px;">
+			<input type="radio" id="state" name="region" value="state" checked="checked">
+		</td>
+		<td style="padding-left: 10px;">
+			<label>State</label>
+		</td>
+		<td style="padding-left: 20px;">
+			<input type="radio" id="county" name="region" value="county">
+		</td>
+		<td style="padding-left: 10px;">
+			<label>County</label>
+		</td>
+		<td style="padding-left: 20px;">
+			<label id="secVarLabel" style="font-size: 15px; ">Variable2: </label>
+		</td>
+		<td style="padding-left: 10px;">
+			<select id="variable2Type" class="form-control" ></select>
+		</td>
+	</tr>
+</table>
+</div>
+
+<script>
+
+//############### first tab content ##################
+//svg width and height
+var width = 960,
+	height = 500;
+	
+var svg = d3.select("body").append("svg")
+			.attr("width", width)
+			.attr("height", height);
+		
+//determine what type of map projection - scale: dimensions of projected map
+var projection = d3.geoAlbersUsa()
+	.scale(900);
+
+//attach the projection to the map	
+//project the specified point from the sphere to the plane  - 2D from 3D
+var path = d3.geoPath()
+			.projection(projection);
+//############### first tab content ##################
+
+</script>			
+
+</body>
+</html>
